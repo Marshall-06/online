@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/api/auth", require("../src/routers/auth.router"))
+app.use("/api/courses", require("../src/routers/course.router"))
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)

@@ -16,6 +16,10 @@ exports.generateRefreshToken = (payload) => {
   );
 };
 
+exports.verifyAccessToken = (token) => {   
+  return jwt.verify(token, process.env.JWT_ACCESS_KEY);
+};
+
 exports.verifyRefreshToken = (token) => {
   return jwt.verify(token, process.env.JWT_REFRESH_KEY);
 };
