@@ -27,7 +27,11 @@ const Course = sequelize.define("Course", {
   thumbnail: {
     type: DataTypes.STRING,
     allowNull: true
-  }
+  },
+  trailer: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
 });
 
 

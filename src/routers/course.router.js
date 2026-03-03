@@ -16,6 +16,7 @@ router.post(
   authorizeRoles("admin", "instructor"), 
   upload.fields([
     { name: "thumbnail", maxCount: 1 },
+    { name: "trailer", maxCount: 1 },
     { name: "videos" }
   ]),
   controller.create

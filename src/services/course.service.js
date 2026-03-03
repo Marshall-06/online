@@ -122,6 +122,7 @@ class CourseService {
 
     const courseInstructorId = user.role === "admin" ? instructor_id || user.id : user.id;
     const thumbnail = files?.thumbnail?.[0]?.filename || null;
+    const trailer = files?.trailer?.[0]?.filename || null;
 
     const course = await Course.create({
       title,
@@ -130,6 +131,7 @@ class CourseService {
       sale_price,
       level,
       thumbnail,
+      trailer,
       instructor_id: courseInstructorId
     });
 
@@ -167,6 +169,7 @@ class CourseService {
     if (price !== undefined) course.price = price;
     if (sale_price !== undefined) course.sale_price = sale_price;
     if (level) course.level = level;
+    if (files?.trailer) course.trailer = files.trailer[0].filename;
 
     // Admin can reassign instructor
     if (user.role === "admin" && instructor_id) course.instructor_id = instructor_id;
