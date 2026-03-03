@@ -13,8 +13,12 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+// auth
 app.use("/api/auth", require("../src/routers/auth.router"))
+// courses
 app.use("/api/courses", require("../src/routers/course.router"))
+// comments
+app.use("/api/comments", require("../src/routers/comment.router"))
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)
