@@ -71,6 +71,53 @@ class CourseController {
       res.status(status).json({ message: err.message });
     }
   }
+ // Increment course views
+  async incrementView(req, res) {
+    try {
+      const views = await CourseService.incrementView(req.params.id);
+      res.json({ views });
+    } catch (err) {
+      const status = err.message === "Course not found" ? 404 : 500;
+      res.status(status).json({ message: err.message });
+    }
+  }
+// like course
+  async like(req, res) {
+    try {
+      const result = await CourseService.likeCourse(
+        req.params.id,
+        req.user.id
+      );
+      res.json(result);
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  }
+// unlike course
+  async unlike(req, res) {
+    try {
+      const result = await CourseService.unlikeCourse(
+        req.params.id,
+        req.user.id
+      );
+      res.json(result);
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  }
+//get liked courses for user
+  async getLikedCourses(req, res) {
+  try {
+    const courses = await CourseService.getLikedCourses(req.user.id);
+    res.json({ data: courses });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 }
+
+}
+
+
+
 
 module.exports = new CourseController();

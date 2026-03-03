@@ -1,6 +1,7 @@
 const authService = require("../services/auth.service");
 const { userResponseDTO } = require("../dto/user.dto");
 
+//register
 exports.register = async (req, res) => {
     try {
         const { user, accessToken } =
@@ -14,7 +15,7 @@ exports.register = async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 };
-
+//login
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -31,7 +32,7 @@ exports.login = async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 };
-
+//refresh token
 exports.refresh = async (req, res) => {
     try {
         const newAccessToken =
@@ -42,7 +43,7 @@ exports.refresh = async (req, res) => {
         res.status(403).json({ message: err.message });
     }
 };
-
+//logout
 exports.logout = async (req, res) => {
     try {
         await authService.logout(req.body.token);

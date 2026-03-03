@@ -32,6 +32,10 @@ const Course = sequelize.define("Course", {
     type: DataTypes.STRING,
     allowNull: true
   },
+  views: {
+  type: DataTypes.INTEGER,
+  defaultValue: 0
+},
 });
 
 

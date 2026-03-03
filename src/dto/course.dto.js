@@ -7,12 +7,13 @@ exports.courseResponseDTO = (course) => {
         sale_price: course.sale_price || null,
         level: course.level,
         thumbnail: course.thumbnail || null,
+        trailer: course.trailer || null,
         total_videos: course.Videos ? course.Videos.length : 0,
         instructor: course.instructor
             ? {
                 id: course.instructor.id,
                 name: course.instructor.name
             }
-            : null 
+            : null
     };
 };

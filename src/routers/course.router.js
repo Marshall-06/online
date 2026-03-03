@@ -9,6 +9,16 @@ const upload = require("../middlewares/upload.middleware");
 router.get("/", controller.getAll);
 router.get("/:id", controller.getById);
 
+// liked courses for users
+router.get("/liked", auth, controller.getLikedCourses);
+
+//view increment
+router.post("/:id/view", controller.incrementView);
+
+// like/unlike
+router.post("/:id/like", auth, controller.like);
+router.delete("/:id/like", auth, controller.unlike);
+
 // Protected
 router.post(
   "/",
