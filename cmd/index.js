@@ -19,6 +19,8 @@ app.use("/api/auth", require("../src/routers/auth.router"))
 app.use("/api/courses", require("../src/routers/course.router"))
 // comments
 app.use("/api/comments", require("../src/routers/comment.router"))
+// profile
+app.use("/api/profile", require("../src/routers/profile.router"))
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)

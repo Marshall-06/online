@@ -13,6 +13,9 @@ const storage = multer.diskStorage({
     else if (file.fieldname === "videos") {
       cb(null, "uploads/videos");
     }
+    else if (file.fieldname === "avatar_img") {
+      cb(null, "uploads/avatars");
+    }
     else {
       cb(new Error("Invalid field"), false);
     }
@@ -39,6 +42,9 @@ const fileFilter = (req, file, cb) => {
     !file.mimetype.startsWith("video/")
   ) {
     return cb(new Error("Trailer must be a video file"), false);
+  }
+  else if (file.fieldname === "avatar_img" && !file.mimetype.startsWith("image/")) {
+    return cb(new Error("Avatar must be an image"), false);
   }
 
   else if (
