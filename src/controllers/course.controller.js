@@ -115,6 +115,27 @@ class CourseController {
   }
 }
 
+async enroll(req, res) {
+    const userId = req.user.id;
+    const courseId = req.params.course_id;
+
+    try {
+      const enrollment = await CourseService.enrollCourse(userId, courseId);
+      res.json({ message: "Course enrolled and saved", enrollment });
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  }
+
+  async getSaved(req, res) {
+    try {
+      const courses = await CourseService.getMyCourses(req.user.id);
+      res.json({ data: courses });
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  }
+
 }
 
 

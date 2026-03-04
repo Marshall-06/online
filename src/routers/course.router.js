@@ -9,6 +9,10 @@ const upload = require("../middlewares/upload.middleware");
 router.get("/", controller.getAll);
 router.get("/:id", controller.getById);
 
+//course after buy
+router.post("/:course_id/enroll", auth, controller.enroll);
+router.get("/my-courses", auth, controller.getSaved);
+
 // liked courses for users
 router.get("/liked", auth, controller.getLikedCourses);
 

@@ -2,6 +2,7 @@ const Course = require("../models/course");
 const Video = require("../models/video");
 const CourseLike = require("../models/courseLike");
 const User = require("../models/user");
+const UserCourse = require("../models/userCourse");
 
 class CourseService {
   // Create course
@@ -162,6 +163,39 @@ class CourseService {
     if (!user) throw new Error("User not found");
 
     return user.Courses;
+  }
+
+  async enrollCourse(userId, courseId) {
+    const course = await Course.findByPk(courseId);
+    if (!course) throw new Error("Course not found");
+
+    const alreadyEnrolled = await UserCourse.findOne({
+      where: { user_id: userId, course_id: courseId },
+    });
+    if (alreadyEnrolled) throw new Error("Already enrolled");
+
+    const enrollment = await UserCourse.create({
+      user_id: userId,
+      course_id: courseId,
+    });
+
+    return enrollment;
+  }
+
+  // Get all saved/enrolled courses for a user
+  async getMyCourses(userId) {
+    return await Course.findAll({
+      include: [
+        {
+          model: UserCourse,
+          where: { user_id: userId },
+          attributes: [],
+        },
+        {
+          model: Video,
+        },
+      ],
+    });
   }
 
 }

@@ -3,6 +3,7 @@ const Course = require("./course")
 const Video = require("./video")
 const CourseLike = require("./courseLike");
 const Comment = require("./comment");
+const UserCourse = require("./userCourse");
 
 // Course belongs to Instructor
 Course.belongsTo(User, { as: "instructor", foreignKey: "instructor_id" });
@@ -31,10 +32,15 @@ Comment.belongsTo(User, { foreignKey: "user_id" });
 Course.hasMany(Comment, { foreignKey: "course_id" });
 Comment.belongsTo(Course, { foreignKey: "course_id" });
 
+// Many-to-Many: User <-> Course through UserCourse
+User.belongsToMany(Course, { through: UserCourse, foreignKey: "user_id" });
+Course.belongsToMany(User, { through: UserCourse, foreignKey: "course_id" });
+
 module.exports = {
     User,
     Course,
     Video,
     CourseLike,
-    Comment
+    Comment,
+    UserCourse
 };
