@@ -22,6 +22,10 @@ app.use("/api/comments", require("../src/routers/comment.router"))
 // profile
 app.use("/api/profile", require("../src/routers/profile.router"))
 
+app.get('/', (req, res) => {
+  res.send('API is running successfully!');
+});
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)
 })
