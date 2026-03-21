@@ -1,4 +1,5 @@
 const { User } = require("../models/model");
+const userResponseDTO = require("../dto/user.dto");
 const { hashPassword, comparePassword } = require("../utils/hash.util");
 const {
     generateAccessToken,
@@ -9,11 +10,16 @@ const {
 class AuthService {
 
     async register(data) {
-        const { phone_num, email, password, role } = data;
+        const { phone_num, email, password, confirm_password, role } = data;
 
         // validate required fields
-        if (!phone_num || !email || !password || !role) {
+        if (!phone_num || !email || !password || !confirm_password || !role) {
             throw new Error("Missing required fields: phone_num, email, password, role");
+        }
+
+        //  check if passwords match
+        if (password !== confirm_password) {
+            throw new Error("Passwords do not match");
         }
 
         // check if user already exists

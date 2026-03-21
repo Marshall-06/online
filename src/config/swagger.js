@@ -4,13 +4,19 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Auth API",
+      title: "EDUmix API",
       version: "1.0.0",
-      description: "Authentication API documentation",
+      description: "EDUmix API documentation",
     },
     servers: [
       {
         url: "http://localhost:8080",
+        description: "Local server",
+      },
+      {
+        //  added your render URL for production testing
+        url: "https://online-1-72ed.onrender.com",
+        description: "Production server",
       },
     ],
     components: {
@@ -23,7 +29,8 @@ const options = {
       },
     },
   },
-  apis: ["./routes/*.js"], 
+  //  fixed path — your routers are in src/routers not routes
+  apis: ["./src/routers/*.js"],
 };
 
 module.exports = swaggerJsdoc(options);

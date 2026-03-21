@@ -1,5 +1,5 @@
 const authService = require("../services/auth.service");
-const { userResponseDTO } = require("../dto/user.dto");
+const userResponseDTO = require("../dto/user.dto");
 
 //register
 exports.register = async (req, res) => {

@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const sequelize = require('../src/config/db');
+const cors = require("cors")
 require("dotenv").config()
 const port = process.env.PORT || 8080
 const swaggerUi = require("swagger-ui-express");
@@ -8,6 +9,14 @@ const swaggerSpec = require("../src/config/swagger");
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+
+//  add this before all routes
+app.use(cors({
+  origin: "*", // allow all origins
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}))
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
@@ -26,11 +35,9 @@ app.get('/', (req, res) => {
 
 // only starts the server locally
 // on Vercel, it does NOT call app.listen() — Vercel handles that itself
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(port, () => {
-    console.log(`Server running on port ${port}`)
-  })
-}
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`)
+})
 
 // exports the app so Vercel can use it as a serverless function
 module.exports = app;

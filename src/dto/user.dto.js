@@ -1,4 +1,4 @@
-exports.userResponseDTO = (user) => {
+const userResponseDTO = (user) => {
     if (!user) return null;
 
     return {
@@ -11,3 +11,6 @@ exports.userResponseDTO = (user) => {
         avatar_img: user.avatar_img || null
     };
 };
+
+
+module.exports = userResponseDTO;
